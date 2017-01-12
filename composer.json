@@ -1,0 +1,17 @@
+{
+    "name": "kadimi/wp-mail-queue",
+    "description": "WordPress Mail Queue",
+    "require": {
+        "kadimi/wp-mail": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nabil Kadimi",
+            "email": "nabil@kadimi.com"
+        }
+    ],
+    "autoload": {
+        "files": [ "src/WPMailQueue.class.php" ]
+    }
+}
