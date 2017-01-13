@@ -28,7 +28,7 @@ class WPMailQueue {
 		$this->stats = [
 			'sent' => 0,
 		];
-		add_action( 'init', [ $this, 'process' ] );
+		add_action( 'shutdown', [ $this, 'process' ] );
 	}
 
 	private function getOption( $option, $default = null ) {
