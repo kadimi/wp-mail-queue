@@ -74,11 +74,10 @@ class WPMailQueue {
 		$catch = apply_filters( $this->optionName( '::WPMail\$catch' ), true );
 		if ( $catch ) {
 			$this->catch( $to, $subject, $message, $headers, $attachments );
+			return true;
 		} else {
-			$this->send( $to, $subject, $message, $headers, $attachments );			
+			return $this->send( $to, $subject, $message, $headers, $attachments );			
 		}
-
-		return [];
 	}
 
 	private function catch( $to, $subject, $message, $headers, $attachments ) {
