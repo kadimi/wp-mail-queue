@@ -62,7 +62,8 @@ class WPMailQueue {
 	public static function instance() {
 		if ( empty( self::$instance ) ) {
 			self::$instance = new self();
-		}		return self::$instance;
+		}
+		return self::$instance;
 	}
 
 	/**
