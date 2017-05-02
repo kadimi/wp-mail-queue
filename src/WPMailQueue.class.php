@@ -26,7 +26,7 @@ class WPMailQueue {
 	 * Should emails be caught.
 	 * @var Boolean
 	 */
-	private $catch = true;
+	private $capture = true;
 
 	/**
 	 * Should emails be processed.
@@ -70,7 +70,7 @@ class WPMailQueue {
 	 * Filters some properties and enqueues processing at the end of the request.
 	 */
 	public function __construct() {
-		$this->catch = apply_filters( $this->optionName( '::' . __FUNCTION__ . '\$catch' ), $this->catch );
+		$this->capture = apply_filters( $this->optionName( '::' . __FUNCTION__ . '\$capture' ), $this->capture );
 		$this->limit = apply_filters( $this->optionName( '::' . __FUNCTION__ . '\$limit' ), $this->limit );
 		$this->process = apply_filters( $this->optionName( '::' . __FUNCTION__ . '\$process' ), $this->process );
 		$this->loadQueue();
@@ -126,20 +126,20 @@ class WPMailQueue {
 		if ( $atts ) {
 			$this->updateQueue();
 		}
-		return $atts ?? null;
+		return $atts ? $atts : null;
 	}
 
 	public function WPMail( $to, $subject, $message, $headers, $attachments ) {
 		$atts = compact( 'to', 'subject', 'message', 'headers', 'attachments' );
-		if ( $this->catch ) {
-			$this->catch( $atts );
+		if ( $this->capture ) {
+			$this->capture( $atts );
 			return true;
 		} else {
 			return $this->send( $atts );
 		}
 	}
 
-	private function catch( $atts ) {
+	private function capture( $atts ) {
 		$this->appendToQueue( $atts );
 		$this->stats['caught']++;
 	}
